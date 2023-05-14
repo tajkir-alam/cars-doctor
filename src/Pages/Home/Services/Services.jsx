@@ -6,8 +6,8 @@ const Services = () => {
 
     useEffect(() => {
         fetch('http://localhost:5000/services')
-        .then(res => res.json())
-        .then(data => setServices(data));
+            .then(res => res.json())
+            .then(data => setServices(data));
     }, [])
 
     return (
@@ -21,6 +21,9 @@ const Services = () => {
                 {
                     services.map(service => <ServicesCard key={service._id} service={service}></ServicesCard>)
                 }
+            </div>
+            <div className='flex justify-center mb-16'>
+                <button className='btn btn-outline btn-warning'>More Products</button>
             </div>
         </div>
     );

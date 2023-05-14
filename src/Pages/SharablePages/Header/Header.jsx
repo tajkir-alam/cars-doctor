@@ -10,6 +10,7 @@ const Header = () => {
         <li className='font-semibold text-md'><NavLink to={'/services'} >Services</NavLink></li>
         <li className='font-semibold text-md'><NavLink to={'/blog'} >Blog</NavLink></li>
         <li className='font-semibold text-md'><NavLink to={'/contact'} >Contact</NavLink></li>
+        <li className='font-semibold text-md'><NavLink to={'/login'} >Login</NavLink></li>
         
     </>
     
@@ -34,7 +35,7 @@ const Header = () => {
             <div className="navbar-end gap-5">
                 <HiOutlineShoppingBag className='text-2xl cursor-pointer'></HiOutlineShoppingBag>
                 <HiOutlineMagnifyingGlass className='text-2xl cursor-pointer'></HiOutlineMagnifyingGlass>
-                <a className="btn btn-outline btn-warning border-2 font-bold tracking-wider">Get started</a>
+                <a className="btn btn-outline btn-warning border-2 font-bold tracking-wider">Appointment</a>
             </div>
         </div>
     );
