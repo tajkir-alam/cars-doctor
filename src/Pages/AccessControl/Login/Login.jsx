@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProvider';
 const Login = () => {
 
-    const { emailLogin } = useContext(AuthContext);
+    const { emailLogin, googleLogin } = useContext(AuthContext);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -20,6 +20,17 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error.message)
+            })
+    }
+
+    const googleSignup = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => {
+                console.log(error.message);
             })
     }
 
@@ -44,7 +55,7 @@ const Login = () => {
                     <input type="submit" value="Sign In" className='btn btn-warning w-full' />
                     <div className="text-center space-y-3 mt-5" >
                         <p>Or Signin With</p>
-                        <span className='grid justify-center'>
+                        <span className='grid justify-center' onClick={googleSignup}>
                             <FaGoogle className='flex justify-center text-2xl cursor-pointer'></FaGoogle>
                         </span>
                     </div>
