@@ -10,7 +10,7 @@ const googlePorvider = new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null);
-    const [loader, setLoader] = true;
+    const [loader, setLoader] = useState(true);
 
     const emailSignup = (email, password) => {
         setLoader(true);

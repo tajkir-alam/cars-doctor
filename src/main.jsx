@@ -10,6 +10,7 @@ import Home from './Pages/Home/Home/Home';
 import Login from './Pages/AccessControl/Login/Login';
 import Registration from './Pages/AccessControl/Registration/Registration';
 import AuthProvider from './Providers/AuthProvider';
+import Checkout from './Pages/Checkout/Checkout';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>
+      },
+      {
+        path: '/checkout/:id',
+        element: <Checkout></Checkout>,
+        loader
       }
     ]
   },

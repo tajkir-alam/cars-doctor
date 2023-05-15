@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FaGoogle } from "react-icons/fa";
 import img from '../../../assets/images/login/login.svg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProvider';
 const Login = () => {
 
@@ -61,7 +61,7 @@ const Login = () => {
                     </div>
                 </form>
                 <p className='text-center mt-6'>
-                    Don't Have an account? <Link to={'/registration'} className='text-warning font-bold'>Sign in</Link>
+                    Don't Have an account? <Link to={'/registration'} className='text-warning font-bold'>Sign up</Link>
                 </p>
             </div>
         </div>

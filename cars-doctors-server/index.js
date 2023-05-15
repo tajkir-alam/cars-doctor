@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 5000;
 require('dotenv').config()
@@ -30,9 +30,20 @@ async function run() {
 
 
     app.get('/services', async (req, res) => {
-        const cursor = servicesCollection.find();
-        const result = await cursor.toArray();
-        res.send(result);
+      const cursor = servicesCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.get('/services/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const options = {
+        projection: { service_id: 1, title: 1, img: 1, price: 1, facility: 1 }
+      }
+      const result = await servicesCollection.findOne(query, options);
+      res.send(result)
+
     })
 
     // Send a ping to confirm a successful connection
@@ -48,9 +59,9 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello this workng')
+  res.send('Hello this workng')
 })
 
 app.listen(port, () => {
-    console.log(`This Project is running on port: ${port}`);
+  console.log(`This Project is running on port: ${port}`);
 })
