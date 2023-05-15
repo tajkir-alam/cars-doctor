@@ -11,6 +11,7 @@ import Login from './Pages/AccessControl/Login/Login';
 import Registration from './Pages/AccessControl/Registration/Registration';
 import AuthProvider from './Providers/AuthProvider';
 import Checkout from './Pages/Checkout/Checkout';
+import Bookings from './Pages/Bookings/Bookings';
 
 const router = createBrowserRouter([
   {
@@ -26,13 +27,17 @@ const router = createBrowserRouter([
         element: <Registration></Registration>
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login></Login>
       },
       {
-        path: '/checkout/:id',
+        path: 'checkout/:id',
         element: <Checkout></Checkout>,
-        loader
+        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+      },
+      {
+        path: 'bookings',
+        element: <Bookings></Bookings>
       }
     ]
   },

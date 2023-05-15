@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../assets/logo.svg'
 import { Link, NavLink } from 'react-router-dom';
 import { HiOutlineMagnifyingGlass, HiOutlineShoppingBag } from "react-icons/hi2";
+import { AuthContext } from '../../../Providers/AuthProvider';
 
-const Header = () => { 
+const Header = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logOut()
+        .then(result => {})
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
+
     const navItem = <>
         <li className='font-semibold text-md'><NavLink to={'/'} >Home</NavLink></li>
         <li className='font-semibold text-md'><NavLink to={'/about'} >About</NavLink></li>
         <li className='font-semibold text-md'><NavLink to={'/services'} >Services</NavLink></li>
         <li className='font-semibold text-md'><NavLink to={'/blog'} >Blog</NavLink></li>
         <li className='font-semibold text-md'><NavLink to={'/contact'} >Contact</NavLink></li>
-        <li className='font-semibold text-md'><NavLink to={'/login'} >Login</NavLink></li>
-        
+        {user ?
+            <>
+                <li className='font-semibold text-md'><NavLink to={'/bookings'} >My Bookings</NavLink></li>
+                <li className='font-semibold text-md' onClick={handleLogout}><NavLink to={'/login'} >Log Out</NavLink></li>
+            </>
+            : <li className='font-semibold text-md'><NavLink to={'/login'} >Login</NavLink></li>
+        }
+
     </>
-    
+
     return (
         <div className="navbar bg-base-100 my-3">
             <div className="navbar-start">
@@ -25,7 +42,7 @@ const Header = () => {
                         {navItem}
                     </ul>
                 </div>
-                <img src={logo} alt="" />
+                <Link to={'/'}><img src={logo} alt="" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
