@@ -28,7 +28,8 @@ const AuthProvider = ({children}) => {
     }
 
     const logOut = () => {
-        signOut(auth);
+        setLoader(true);
+        return signOut(auth);
     }
 
     useEffect(() => {
@@ -44,6 +45,7 @@ const AuthProvider = ({children}) => {
     const authInfo = {
         user,
         loader,
+        setLoader,
         emailSignup,
         emailLogin,
         googleLogin,

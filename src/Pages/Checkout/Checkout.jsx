@@ -3,19 +3,20 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 
 const Checkout = () => {
-    const { user } = useContext(AuthContext);
+    const { user, setLoader } = useContext(AuthContext);
 
     const loadService = useLoaderData();
     const { _id, img, price, service_id, title, facility } = loadService;
 
     const handleCheckout = e => {
+        setLoader(true);
         e.preventDefault();
         const form = e.target;
         const serviceName = form.serviceName.value;
         const date = form.date.value;
         const email = form.email.value;
         const price = form.price.value;
-        const serviceDetails = { serviceName, date, email, price, service_id }
+        const serviceDetails = { serviceName, date, email, price, service_id, img }
 
         fetch('http://localhost:5000/bookings', {
             method: "POST",
@@ -33,7 +34,7 @@ const Checkout = () => {
                 }
             })
     }
-
+    
     return (
         <div className='bg-[#F3F3F3] p-16 my-8'>
             <form onSubmit={handleCheckout}>
@@ -53,7 +54,7 @@ const Checkout = () => {
                     </div>
                     <div className='space-y-2'>
                         <label htmlFor="email" className='block pl-2'>Email</label>
-                        <input type="email" placeholder="Enter Your Email" name='email' className="input w-full" />
+                        <input type="email" defaultValue={user?user.email : ""} name='email' className="input w-full" />
                     </div>
                     <div className='space-y-2'>
                         <label htmlFor="price" className='block pl-2'>Due Amount</label>
