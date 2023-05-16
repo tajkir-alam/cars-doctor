@@ -13,13 +13,28 @@ const Bookings = () => {
             .then(data => setBookingsData(data))
     }, [])
 
+    const handleDeleteBooking = (id) => {
+        fetch(`http://localhost:5000/bookings/${id}`,{
+            method: "DELETE",
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.deletedCount > 0){
+                alert('Your Booking is Cancelled')
+                const remainingBookings = bookingsData.filter(booking => booking._id !== id)
+                setBookingsData(remainingBookings);
+            }
+        })
+    }
+
     return (
         <div>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     <tbody>
                         {
-                            bookingsData.map((bookings, index) => <BookingsCard key={index} bookings={bookings}></BookingsCard>)
+                            bookingsData.map((bookings, index) => <BookingsCard key={index} bookings={bookings} handleDeleteBooking={handleDeleteBooking}></BookingsCard>)
                         }
                     </tbody>
                 </table>
